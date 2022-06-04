@@ -2,10 +2,17 @@ name: 'My First Github Actions'
 
 on: push # push 이벤트에 반응
 
+env: 
+  WORKFLOW_LEVEL: "This environment variable comes from the workflow level"
+
 jobs:
   first_job:
       name: 'First Job'
       runs-on: ubuntu-latest # 가장 최신 버전의 우분투에서 깃헙 액션이 동작
+
+      env:
+        JOB_LEVEL_1: "This environment variable comes from the job level - first job"
+
       steps: # 여러 개의 step 지정 가능
         - name: 'Say Hello World 1'
           shell: bash
@@ -15,3 +22,51 @@ jobs:
           shell: pwsh # shell 은 여러 가지 사용 가능
           run: |
             echo "Lorem Ipsum from Stemp #2"
+
+        - name: Check environment variable 1
+          shell: bash
+          env:
+            STEP_LEVEL_1: "This environment variable comes from the step level 1"
+          run: |
+            echo "workflow level: $WORKFLOW_LEVEL"
+            echo "job level: ${{ env.JOB_LEVEL_1 }}"
+            echo "step level: $STEP_LEVEL_1"
+            
+  second_job:
+      name: 'Second Job'
+      runs-on: ubuntu-latest # 가장 최신 버전의 우분투에서 깃헙 액션이 동작
+
+      env:
+        JOB_LEVEL_2: "This environment variable comes from the job level - second job"
+
+      steps: # 여러 개의 step 지정 가능
+        - name: 'Say Hello World 1'
+          shell: bash
+          run: |
+            echo "Hello World from Step #1"
+        - name: 'Say Lorem Ipsum 1'
+          shell: pwsh # shell 은 여러 가지 사용 가능
+          run: |
+            echo "Lorem Ipsum from Stemp #2"
+
+        - name: Check environment variable 1
+          shell: bash
+          env:
+            STEP_LEVEL_1: "This environment variable comes from the step level 1"
+          run: |
+            echo "workflow level: $WORKFLOW_LEVEL"
+            echo "job level: $JOB_LEVEL_1"
+            echo "job level: $JOB_LEVEL_2"
+            echo "step level: $STEP_LEVEL_1"
+            echo "step level: $STEP_LEVEL_2"
+
+        - name: Check environment variable 2
+          shell: pwsh
+          env:
+            STEP_LEVEL_2: "This environment variable comes from the step level 2"
+          run: |
+            echo "workflow level: $env:WORKFLOW_LEVEL"
+            echo "job level: $JOB_LEVEL_1"
+            echo "job level: ${{ env.JOB_LEVEL_2 }}"
+            echo "step level: $STEP_LEVEL_1"
+            echo "step level: $STEP_LEVEL_2"
