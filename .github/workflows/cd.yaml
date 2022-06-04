@@ -1,3 +1,4 @@
+# cd.yaml
 name: 'Continuous Deployment'
 
 on:
@@ -15,6 +16,7 @@ on:
 jobs:
   release:
     name: 'Release app'
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
