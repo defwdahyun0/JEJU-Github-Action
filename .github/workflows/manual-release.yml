@@ -12,14 +12,12 @@ on:
 jobs:
   call_build:
     uses: ./.github/workflows/ci.yaml
-		needs: call_build
     with:
       artifact_name: apiapp
-
   call_release:
     uses: ./.github/workflows/cd.yaml
-		needs: call_build
+    needs: call_build
     with:
-      title: ${{ github.event.inputs.title }}
+      title: latest
       artifact_name: apiapp
     secrets: inherit
