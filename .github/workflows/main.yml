@@ -1,6 +1,16 @@
 name: 'My First GitHub Actions'
 
-on: [ 'push', 'pull_request' ]
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/library1/*'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   first_job:
