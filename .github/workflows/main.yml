@@ -1,16 +1,6 @@
 name: 'My First GitHub Actions'
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'src/library1/*'
-    tags:
-      - 'v*'
-  pull_request:
-    branches:
-      - main
+on: push 
 
 jobs:
   build:
@@ -75,4 +65,3 @@ jobs:
           prerelease: false
           files: |
             artifacts/apiapp.zip
-            
