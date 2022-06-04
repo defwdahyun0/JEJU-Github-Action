@@ -1,0 +1,17 @@
+name: 'My First Github Actions'
+
+on: push # push 이벤트에 반응
+
+jobs:
+  first_job:
+      name: 'First Job'
+      runs-on: ubuntu-latest # 가장 최신 버전의 우분투에서 깃헙 액션이 동작
+      steps: # 여러 개의 step 지정 가능
+        - name: 'Say Hello World 1'
+          shell: bash
+          run: |
+            echo "Hello World from Step #1"
+        - name: 'Say Lorem Ipsum 1'
+          shell: pwsh # shell 은 여러 가지 사용 가능
+          run: |
+            echo "Lorem Ipsum from Stemp #2"
