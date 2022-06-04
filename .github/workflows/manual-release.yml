@@ -1,6 +1,6 @@
 name: 'Manual Release'
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       title:
@@ -16,8 +16,8 @@ jobs:
 
   call_release:
     uses: ./.github/workflows/cd.yaml
+    needs: call_build
     with:
-      title: latest
-      artifact_name: api_app
+      title: ${{ github.event.inputs.title }}
+      artifact_name: apiapp
     secrets: inherit
-    
